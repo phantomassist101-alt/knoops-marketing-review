@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Knoops UAE — Monthly Marketing Review | NDS Investment</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #ffffff;
+    --surface: #faf7f4;
+    --surface2: #f3ede6;
+    --border: #e0d5c8;
+    --text: #2c1810;
+    --text2: #6b5344;
+    --text3: #a08a7a;
+    --gold: #8B5E3C;
+    --gold-dim: rgba(139,94,60,0.08);
+    --green: #16a34a;
+    --green-dim: rgba(22,163,74,0.08);
+    --red: #dc2626;
+    --red-dim: rgba(220,38,38,0.08);
+    --blue: #2563eb;
+    --blue-dim: rgba(37,99,235,0.08);
+    --orange: #ea580c;
+    --orange-dim: rgba(234,88,12,0.08);
+    --purple: #7c3aed;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100vh;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 30px 0;
+    overflow-y: auto;
+    z-index: 100;
+    font-size: 13px;
+  }
+  .nav-brand {
+    padding: 0 24px 24px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 16px;
+  }
+  .nav-brand h3 {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .nav-brand p {
+    font-size: 11px;
+    color: var(--text3);
+  }
+  .nav a {
+    display: block;
+    padding: 8px 24px;
+    color: var(--text2);
+    text-decoration: none;
+    transition: all 0.15s;
+    border-left: 2px solid transparent;
+  }
+  .nav a:hover, .nav a.active {
+    color: var(--gold);
+    background: var(--gold-dim);
+    border-left-color: var(--gold);
+  }
+  .nav .nav-section {
+    padding: 16px 24px 6px;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text3);
+    font-weight: 600;
+  }
+
+  /* MOBILE NAV */
+  .nav-close { display: none; }
+  .hamburger {
+    display: none;
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 200;
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--gold);
+    font-size: 24px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 90;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* MAIN */
+  .main {
+    margin-left: 260px;
+    max-width: 1400px;
+    padding: 40px 80px 120px;
+  }
+
+  /* COVER */
+  .cover {
+    padding: 80px 0 60px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 60px;
+  }
+  .cover .tag {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .cover h1 {
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+  }
+  .cover .sub {
+    font-size: 18px;
+    color: var(--text2);
+    font-weight: 300;
+    margin-bottom: 30px;
+    max-width: 800px;
+  }
+  .cover .meta {
+    font-size: 13px;
+    color: var(--text3);
+  }
+
+  /* SECTIONS */
+  .section {
+    margin-bottom: 80px;
+    scroll-margin-top: 20px;
+  }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 30px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-num {
+    font-size: 48px;
+    font-weight: 900;
+    color: rgba(139,94,60,0.12);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .section-header h2 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 36px 0 14px;
+    color: var(--text);
+  }
+  h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 24px 0 10px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  p {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--text2);
+    margin-bottom: 14px;
+    max-width: 800px;
+  }
+  p strong { color: var(--text); }
+
+  ul.text-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+  }
+  ul.text-list li {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--text2);
+    padding-left: 20px;
+    position: relative;
+    margin-bottom: 4px;
+  }
+  ul.text-list li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  /* CARDS & GRIDS */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin: 20px 0 30px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+  }
+  .card-value {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--gold);
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+  .card-label {
+    font-size: 12px;
+    color: var(--text3);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .card-sub {
+    font-size: 12px;
+    color: var(--text3);
+    margin-top: 8px;
+  }
+
+  /* CHART CONTAINERS */
+  .chart-container {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    margin: 20px 0 30px;
+    position: relative;
+  }
+  .chart-container canvas {
+    max-height: 360px;
+  }
+  .chart-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+  }
+  .chart-source {
+    font-size: 11px;
+    color: var(--text3);
+    margin-top: 12px;
+  }
+  .two-chart {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 20px 0 30px;
+  }
+
+  /* TABLE SCROLL WRAPPER */
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 16px 0 24px;
+    border-radius: 6px;
+  }
+
+  /* TABLES */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  th {
+    text-align: left;
+    padding: 12px 16px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  td {
+    padding: 11px 16px;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+    color: var(--text2);
+  }
+  tr:hover td { background: rgba(0,0,0,0.02); }
+  .row-highlight td {
+    color: var(--gold);
+    font-weight: 600;
+    background: var(--gold-dim);
+  }
+  .positive { color: var(--green); }
+  .negative { color: var(--red); }
+
+  /* CALLOUT */
+  .callout {
+    background: var(--gold-dim);
+    border-left: 3px solid var(--gold);
+    padding: 20px 24px;
+    border-radius: 0 10px 10px 0;
+    margin: 20px 0 30px;
+  }
+  .callout p { color: var(--text); margin: 0; }
+  .callout-blue {
+    background: var(--blue-dim);
+    border-left-color: var(--blue);
+  }
+  .callout-green {
+    background: var(--green-dim);
+    border-left-color: var(--green);
+  }
+  .callout-red {
+    background: var(--red-dim);
+    border-left-color: var(--red);
+  }
+
+  /* INSIGHT CARDS */
+  .insight-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 16px;
+    margin: 20px 0 30px;
+  }
+  .insight-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px;
+    border-top: 3px solid var(--gold);
+  }
+  .insight-card .insight-icon {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+  .insight-card h4 {
+    color: var(--text);
+    margin: 0 0 10px;
+    font-size: 16px;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .insight-card p {
+    font-size: 14px;
+    color: var(--text2);
+    margin: 0 0 12px;
+    max-width: none;
+  }
+  .insight-card .rec {
+    font-size: 13px;
+    color: var(--green);
+    font-weight: 500;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+  }
+  .insight-card.accent-green { border-top-color: var(--green); }
+  .insight-card.accent-red { border-top-color: var(--red); }
+  .insight-card.accent-blue { border-top-color: var(--blue); }
+  .insight-card.accent-orange { border-top-color: var(--orange); }
+  .insight-card.accent-purple { border-top-color: var(--purple); }
+
+  /* ===== RESPONSIVE — TABLET ===== */
+  @media (max-width: 900px) {
+    .nav {
+      position: fixed;
+      top: 0;
+      right: -280px;
+      left: auto;
+      width: 280px;
+      height: 100vh;
+      border-right: none;
+      border-left: 1px solid var(--border);
+      transition: right 0.3s ease;
+      z-index: 150;
+    }
+    .nav.open { right: 0; }
+    .nav-close {
+      display: block;
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text2);
+      font-size: 20px;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .nav a {
+      padding: 12px 24px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      border-left: none;
+      border-right: 2px solid transparent;
+    }
+    .nav a:hover, .nav a.active {
+      border-left-color: transparent;
+      border-right-color: var(--gold);
+    }
+    .hamburger { display: flex; }
+    .nav-overlay.active { display: block; }
+    .main { margin-left: 0; padding: 20px 24px 80px; }
+    .cover { padding: 50px 0 40px; margin-bottom: 40px; }
+    .cover h1 { font-size: 30px; }
+    .cover .sub { font-size: 16px; }
+    .section { margin-bottom: 50px; }
+    .section-header { flex-wrap: wrap; gap: 8px 16px; margin-bottom: 20px; }
+    .section-num { font-size: 36px; }
+    .section-header h2 { font-size: 22px; }
+    h3 { font-size: 17px; margin: 28px 0 12px; }
+    .card-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .card { padding: 18px; }
+    .card-value { font-size: 26px; }
+    .two-chart { grid-template-columns: 1fr; }
+    .chart-container canvas { max-height: 300px; }
+    .insight-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ===== RESPONSIVE — SMALL PHONE ===== */
+  @media (max-width: 520px) {
+    .main { padding: 16px 16px 80px; }
+    body { font-size: 14px; }
+    p { font-size: 14px; }
+    .cover { padding: 40px 0 30px; margin-bottom: 30px; }
+    .cover h1 { font-size: 24px; letter-spacing: -0.5px; }
+    .cover .sub { font-size: 14px; margin-bottom: 20px; }
+    .cover .meta { font-size: 12px; }
+    .section { margin-bottom: 40px; }
+    .section-header { margin-bottom: 16px; padding-bottom: 12px; }
+    .section-num { font-size: 28px; }
+    .section-header h2 { font-size: 20px; }
+    h3 { font-size: 16px; margin: 24px 0 10px; }
+    h4 { font-size: 13px; }
+    .card-grid { grid-template-columns: 1fr; gap: 10px; }
+    .card { padding: 16px; }
+    .card-value { font-size: 24px; }
+    .card-label { font-size: 11px; }
+    .chart-container { padding: 16px; margin: 14px 0 20px; }
+    .chart-container canvas { max-height: 280px; }
+    .chart-title { font-size: 12px; }
+    .chart-source { font-size: 10px; }
+    .two-chart { gap: 12px; margin: 14px 0 20px; }
+    .table-wrap { margin: 12px -16px 20px; border-radius: 0; }
+    table { font-size: 12px; min-width: 500px; }
+    th { padding: 10px 12px; font-size: 10px; }
+    td { padding: 9px 12px; }
+    .callout { padding: 16px 18px; margin: 16px 0 24px; }
+    .callout p { font-size: 14px; }
+    .insight-grid { grid-template-columns: 1fr; }
+    .insight-card { padding: 20px; }
+  }
+
+  @media print {
+    .nav { display: none; }
+    .hamburger { display: none; }
+    .main { margin-left: 0; max-width: 100%; padding: 20px 40px; }
+    body { background: #fff; color: #2c1810; }
+    .cover { page-break-after: always; }
+    .section { page-break-inside: avoid; }
+    .card, .chart-container, .insight-card { border-color: #e0d5c8; background: #faf7f4; }
+    .card-value { color: #8B5E3C; }
+    th { color: #8B5E3C; background: #faf7f4; }
+    td { color: #6b5344; }
+    .callout { background: #faf7f4; border-left-color: #8B5E3C; }
+    .callout p { color: #2c1810; }
+    p, ul.text-list li { color: #6b5344; }
+    .section-num { color: rgba(139,94,60,0.12); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HAMBURGER BUTTON -->
+<button class="hamburger" id="navToggle" aria-label="Open navigation">☰</button>
+
+<!-- NAV OVERLAY -->
+<div class="nav-overlay" id="navOverlay"></div>
+
+<!-- SIDEBAR NAV -->
+<nav class="nav" id="navSidebar">
+  <button class="nav-close" id="navClose" aria-label="Close navigation">✕</button>
+  <div class="nav-brand">
+    <h3>Knoops UAE</h3>
+    <p>Monthly Marketing Review</p>
+  </div>
+  <div class="nav-section">Performance</div>
+  <a href="#s01">01. Overview</a>
+  <a href="#s02">02. Store Performance</a>
+  <a href="#s03">03. Dine-in vs Delivery Split</a>
+  <a href="#s10">10. New Drinks &amp; Specials</a>
+  <a href="#s11">11. Coffee Performance</a>
+  <div class="nav-section">Categories</div>
+  <a href="#s04">04. Category Performance</a>
+  <a href="#s05">05. Top 5 Categories</a>
+  <div class="nav-section">Delivery</div>
+  <a href="#s06">06. Delivery Platform Performance</a>
+  <div class="nav-section">Campaigns</div>
+  <a href="#s07">07. Ramadan Campaign</a>
+  <a href="#s08">08. Post-Ramadan Campaign</a>
+  <div class="nav-section">Strategy</div>
+  <a href="#s09">09. Key Insights &amp; Recommendations</a>
+</nav>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+<!-- COVER -->
+<div class="cover">
+  <div class="tag">Monthly Marketing Review</div>
+  <h1>Knoops UAE — Monthly<br>Marketing Review</h1>
+  <div class="sub">Performance deep-dive: January – April 2026. Sales, category, delivery, and campaign analysis across all 3 stores.</div>
+  <div class="meta">
+    Prepared by NDS Investment / Knoops ME — May 2026<br>
+    Confidential
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 01. OVERVIEW -->
+<!-- ============================================================ -->
+<div class="section" id="s01">
+  <div class="section-header">
+    <div class="section-num">01</div>
+    <h2>Overview</h2>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-value">2.47M</div>
+      <div class="card-label">Total Sales Jan–Apr (AED)</div>
+      <div class="card-sub">824,814 + 495,730 + 515,931 + 634,233</div>
+    </div>
+    <div class="card">
+      <div class="card-value">634K</div>
+      <div class="card-label">April Sales (AED)</div>
+      <div class="card-sub">+22.9% vs March</div>
+    </div>
+    <div class="card">
+      <div class="card-value">48,602</div>
+      <div class="card-label">Total Transactions Jan–Apr</div>
+      <div class="card-sub">15,372 + 9,957 + 10,645 + 12,628</div>
+    </div>
+    <div class="card">
+      <div class="card-value">3 Stores</div>
+      <div class="card-label">Active Locations</div>
+      <div class="card-sub">Mirdif City Centre · Yas Mall · DXBike Meydan</div>
+    </div>
+  </div>
+
+  <div class="chart-container">
+    <div class="chart-title">Monthly Total Sales (AED)</div>
+    <canvas id="chartOverview"></canvas>
+    <div class="chart-source">Source: Tenzo</div>
+  </div>
+
+  <div class="callout">
+    <p>January was the peak month driven by cooler weather and post-holiday traffic. February saw a natural seasonal dip (−39.9%), March held steady during Ramadan (+4.1%), and April bounced back strongly (+22.9%) with warmer weather driving cold drink demand. <strong>Total Q1+April performance: AED 2.47M across 48,602 transactions.</strong></p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 02. STORE PERFORMANCE -->
+<!-- ============================================================ -->
+<div class="section" id="s02">
+  <div class="section-header">
+    <div class="section-num">02</div>
+    <h2>Store Performance</h2>
+  </div>
+
+  <h3>Store-wise Sales (AED)</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Store</th><th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>Jan→Apr %</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Mirdif City Centre</td><td>266,811</td><td>153,372</td><td>169,335</td><td>244,950</td><td class="negative">−8.2%</td></tr>
+        <tr><td>Yas Mall Abu Dhabi</td><td>347,750</td><td>194,396</td><td>228,549</td><td>220,678</td><td class="negative">−36.5%</td></tr>
+        <tr><td>DXBike Meydan</td><td>183,478</td><td>111,178</td><td>116,514</td><td>167,657</td><td class="negative">−8.6%</td></tr>
+        <tr class="row-highlight"><td>Total (3 Stores)</td><td>798,039</td><td>458,946</td><td>514,398</td><td>633,285</td><td>−20.6%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:12px;color:var(--text3);">Note: Totals above exclude Shopify &amp; Events. Full totals incl. Shopify: 824,814 / 495,730 / 515,931 / 634,233.</p>
+
+  <h3>Month-over-Month % Change</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Store</th><th>Feb vs Jan</th><th>Mar vs Feb</th><th>Apr vs Mar</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Mirdif</td><td class="negative">−42.5%</td><td class="positive">+10.4%</td><td class="positive">+44.7%</td></tr>
+        <tr><td>Yas Mall</td><td class="negative">−44.1%</td><td class="positive">+17.6%</td><td class="negative">−3.4%</td></tr>
+        <tr><td>Meydan</td><td class="negative">−39.4%</td><td class="positive">+4.8%</td><td class="positive">+43.9%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="chart-container">
+    <div class="chart-title">Sales by Store — Monthly Comparison (AED)</div>
+    <canvas id="chartStoreGrouped"></canvas>
+    <div class="chart-source">Source: Tenzo</div>
+  </div>
+
+  <div class="two-chart">
+    <div class="chart-container">
+      <div class="chart-title">April Sales Share by Store</div>
+      <canvas id="chartStorePie"></canvas>
+    </div>
+    <div class="chart-container" style="display:flex;flex-direction:column;justify-content:center;">
+      <div class="chart-title">April Store Share</div>
+      <ul class="text-list">
+        <li><strong>Mirdif City Centre:</strong> 38.7%</li>
+        <li><strong>Yas Mall Abu Dhabi:</strong> 34.8%</li>
+        <li><strong>DXBike Meydan:</strong> 26.5%</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p>Mirdif rebounded strongest in April (+44.7% MoM), reclaiming its position as the top store. <strong>Yas Mall underperformed budget consistently</strong> (−13% Jan, −7% Feb, −19% Mar, −21% Apr). Meydan continues to massively outperform budget (+89% Jan, +167% Feb, +110% Mar, +221% Apr).</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 03. DINE-IN vs DELIVERY SPLIT -->
+<!-- ============================================================ -->
+<div class="section" id="s03">
+  <div class="section-header">
+    <div class="section-num">03</div>
+    <h2>Dine-in vs Delivery Split</h2>
+  </div>
+
+  <h3>Order Type Breakdown (AED)</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Channel</th><th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Eat In</td><td>554,930</td><td>311,489</td><td>344,022</td><td>411,882</td></tr>
+        <tr><td>Take Away</td><td>134,757</td><td>114,007</td><td>79,435</td><td>123,759</td></tr>
+        <tr class="row-highlight"><td>TA Total (Dine-in)</td><td>689,687</td><td>425,496</td><td>423,457</td><td>535,641</td></tr>
+        <tr><td>Deliveroo</td><td>60,585</td><td>29,134</td><td>29,895</td><td>38,330</td></tr>
+        <tr><td>Talabat</td><td>40,276</td><td>21,305</td><td>20,681</td><td>32,123</td></tr>
+        <tr><td>Careem</td><td>11,744</td><td>9,646</td><td>8,035</td><td>11,495</td></tr>
+        <tr><td>Noon</td><td>11,366</td><td>8,301</td><td>10,400</td><td>15,696</td></tr>
+        <tr class="row-highlight"><td>HD Total (Delivery)</td><td>123,971</td><td>68,386</td><td>69,011</td><td>97,644</td></tr>
+        <tr><td><strong>HD % of Total</strong></td><td><strong>15.2%</strong></td><td><strong>13.8%</strong></td><td><strong>13.4%</strong></td><td><strong>15.4%</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="two-chart">
+    <div class="chart-container">
+      <div class="chart-title">Dine-in vs Delivery — Monthly (AED)</div>
+      <canvas id="chartDineInDelivery"></canvas>
+    </div>
+    <div class="chart-container">
+      <div class="chart-title">April Revenue Split</div>
+      <canvas id="chartSplitDonut"></canvas>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p>Delivery holds steady at ~14–15% of total sales. April delivery revenue (AED 97,644) recovered to near-January levels. <strong>The dine-in channel drives 84–86% of revenue consistently</strong> — this is where the brand experience lives. Delivery is growing but contribution margins need work (see Section 06).</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 04. CATEGORY PERFORMANCE -->
+<!-- ============================================================ -->
+<div class="section" id="s04">
+  <div class="section-header">
+    <div class="section-num">04</div>
+    <h2>Category Performance</h2>
+  </div>
+
+  <h3>Category Sales (AED)</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Category</th><th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>Jan→Apr %</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Hot Chocolate</td><td>400,955</td><td>213,044</td><td>187,683</td><td>209,372</td><td class="negative">−47.8%</td></tr>
+        <tr><td>Iced Chocolate</td><td>73,357</td><td>58,590</td><td>52,079</td><td>92,405</td><td class="positive">+26.0%</td></tr>
+        <tr><td>Milkshake</td><td>62,130</td><td>45,124</td><td>56,952</td><td>69,440</td><td class="positive">+11.8%</td></tr>
+        <tr><td>Coffee — Hot</td><td>38,392</td><td>28,390</td><td>40,414</td><td>41,370</td><td class="positive">+7.8%</td></tr>
+        <tr><td>Choc Retail Tubes</td><td>86,687</td><td>34,863</td><td>19,722</td><td>30,379</td><td class="negative">−64.9%</td></tr>
+        <tr><td>Mocha — Hot</td><td>35,032</td><td>21,015</td><td>24,650</td><td>27,014</td><td class="negative">−22.9%</td></tr>
+        <tr><td>Bakery-Sweet</td><td>31,943</td><td>19,687</td><td>23,625</td><td>30,728</td><td class="negative">−3.8%</td></tr>
+        <tr><td>Knoops Specials</td><td>—</td><td>—</td><td>24,958</td><td>25,443</td><td style="color:var(--blue)">New</td></tr>
+        <tr><td>Coffee — Cold</td><td>—</td><td>11,283</td><td>20,547</td><td>21,727</td><td class="positive">+92.6% (Feb→Apr)</td></tr>
+        <tr><td>Mocha — Iced</td><td>16,986</td><td>11,408</td><td>—</td><td>—</td><td style="color:var(--text3)">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="chart-container">
+    <div class="chart-title">Top 5 Category Trends — Monthly (AED)</div>
+    <canvas id="chartCategoryTrend"></canvas>
+    <div class="chart-source">Source: Tenzo</div>
+  </div>
+
+  <div class="callout">
+    <p>Hot Chocolate remains king at 33% of April sales, but cold drinks are surging — <strong>Iced Chocolate grew +26% Jan→Apr, Cold Coffee +92.6% Feb→Apr.</strong> As summer approaches, the cold drink portfolio (Iced Choc + Milkshake + Cold Coffee + Mocha Iced) is becoming critical. In April, <strong>cold drinks = 29% of sales vs 19.8% in Jan.</strong></p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 05. TOP 5 CATEGORIES -->
+<!-- ============================================================ -->
+<div class="section" id="s05">
+  <div class="section-header">
+    <div class="section-num">05</div>
+    <h2>Top 5 Categories</h2>
+  </div>
+
+  <h3>Monthly Top 5 with % Contribution</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Rank</th><th>February</th><th>%</th><th>March</th><th>%</th><th>April</th><th>%</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Hot Chocolate — 213,044</td><td>43.0%</td><td>Hot Chocolate — 187,683</td><td>36.4%</td><td>Hot Chocolate — 209,372</td><td>33.0%</td></tr>
+        <tr><td>2</td><td>Iced Chocolate — 58,590</td><td>11.8%</td><td>Milkshake — 56,952</td><td>11.0%</td><td>Iced Chocolate — 92,405</td><td>14.6%</td></tr>
+        <tr><td>3</td><td>Milkshake — 45,124</td><td>9.1%</td><td>Iced Chocolate — 52,079</td><td>10.1%</td><td>Milkshake — 69,440</td><td>11.0%</td></tr>
+        <tr><td>4</td><td>Retail Tubes — 34,863</td><td>7.0%</td><td>Coffee Hot — 40,414</td><td>7.8%</td><td>Coffee Hot — 41,370</td><td>6.5%</td></tr>
+        <tr><td>5</td><td>Coffee Hot — 28,390</td><td>5.7%</td><td>Knoops Specials — 24,958</td><td>4.8%</td><td>Bakery-Sweet — 30,728</td><td>4.8%</td></tr>
+        <tr class="row-highlight"><td></td><td>Top 5 Total — 380,011</td><td>76.7%</td><td>Top 5 Total — 362,086</td><td>70.2%</td><td>Top 5 Total — 443,315</td><td>69.9%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="chart-container">
+    <div class="chart-title">Top 5 Categories — Feb vs Mar vs Apr (AED)</div>
+    <canvas id="chartTop5"></canvas>
+    <div class="chart-source">Source: Tenzo</div>
+  </div>
+
+  <div class="callout">
+    <p>Hot Chocolate's dominance is declining month-over-month (43% → 36% → 33%) as the seasonal mix shifts. <strong>Iced Chocolate is the rising star</strong> — jumping from #3 in March to #2 in April with 77% MoM growth. Milkshake holds steady at ~10–11% share. The Knoops Specials (Ramadan items) made a strong debut in March.</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 06. DELIVERY PLATFORM PERFORMANCE -->
+<!-- ============================================================ -->
+<div class="section" id="s06">
+  <div class="section-header">
+    <div class="section-num">06</div>
+    <h2>Delivery Platform Performance</h2>
+  </div>
+
+  <h3>Platform Sales (AED)</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Platform</th><th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>Apr MoM%</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Deliveroo</td><td>61,632</td><td>30,166</td><td>30,271</td><td>39,567</td><td class="positive">+30.7%</td></tr>
+        <tr><td>Talabat</td><td>40,391</td><td>21,643</td><td>21,025</td><td>33,046</td><td class="positive">+57.1%</td></tr>
+        <tr><td>Careem</td><td>11,874</td><td>9,925</td><td>7,824</td><td>11,626</td><td class="positive">+48.6%</td></tr>
+        <tr><td>Noon</td><td>11,224</td><td>8,340</td><td>10,701</td><td>15,765</td><td class="positive">+47.3%</td></tr>
+        <tr class="row-highlight"><td>Total</td><td>125,121</td><td>70,074</td><td>69,821</td><td>100,004</td><td>+43.2%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Orders &amp; Average Order Value</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Month</th><th>Orders</th><th>AOV (AED)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>January</td><td>2,100</td><td>59.6</td></tr>
+        <tr><td>February</td><td>1,270</td><td>55.2</td></tr>
+        <tr><td>March</td><td>1,242</td><td>56.2</td></tr>
+        <tr><td>April</td><td>1,803</td><td>55.5</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="chart-container">
+    <div class="chart-title">Delivery Sales by Platform — Monthly (AED)</div>
+    <canvas id="chartPlatformGrouped"></canvas>
+    <div class="chart-source">Source: Numu MBR</div>
+  </div>
+
+  <h3>Delivery Revenue by Store (AED)</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Store</th><th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>DXBike Meydan</td><td>64,399</td><td>38,774</td><td>40,842</td><td>50,484</td></tr>
+        <tr><td>Mirdif City Centre</td><td>39,289</td><td>19,892</td><td>19,178</td><td>31,668</td></tr>
+        <tr><td>Yas Mall Abu Dhabi</td><td>21,433</td><td>11,408</td><td>9,801</td><td>17,852</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Contribution Margin by Platform (AED)</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Platform</th><th>Jan CM</th><th>Feb CM</th><th>Mar CM</th><th>Apr CM</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Deliveroo</td><td>20,846</td><td>9,884</td><td>8,138</td><td>7,561</td></tr>
+        <tr><td>Talabat</td><td>13,700</td><td>2,222</td><td>3,611</td><td>3,949</td></tr>
+        <tr><td>Careem</td><td>2,965</td><td>3,200</td><td>2,053</td><td>2,777</td></tr>
+        <tr><td>Noon</td><td>5,302</td><td>4,032</td><td>4,309</td><td>5,742</td></tr>
+        <tr class="row-highlight"><td>Total</td><td>42,812</td><td>19,338</td><td>18,111</td><td>20,029</td></tr>
+        <tr><td><strong>CM % of Sales</strong></td><td><strong>34.2%</strong></td><td><strong>27.6%</strong></td><td><strong>25.9%</strong></td><td><strong>20.0%</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="chart-container">
+    <div class="chart-title">Delivery Contribution Margin % — Declining Trend</div>
+    <canvas id="chartCMTrend"></canvas>
+    <div class="chart-source">Source: Numu MBR</div>
+  </div>
+
+  <div class="callout callout-red">
+    <p>All platforms recovered in April. <strong>Noon is the standout performer</strong> — highest growth (+47.3%) and best CM trend. Deliveroo remains the volume leader but CM is eroding (34% in Jan → 19% in Apr). Talabat showed the strongest MoM recovery (+57.1%). <strong>Key concern: overall CM% declining from 34% to 20%</strong> — heavy discounting is driving topline but compressing margins.</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 07. RAMADAN CAMPAIGN -->
+<!-- ============================================================ -->
+<div class="section" id="s07">
+  <div class="section-header">
+    <div class="section-num">07</div>
+    <h2>Ramadan Campaign</h2>
+  </div>
+  <p style="color:var(--text3);margin-bottom:24px;">16 February – 22 March 2026</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-value">544,549</div>
+      <div class="card-label">Total Sales (AED)</div>
+    </div>
+    <div class="card">
+      <div class="card-value">35 Days</div>
+      <div class="card-label">Campaign Duration</div>
+    </div>
+    <div class="card">
+      <div class="card-value">~15,558</div>
+      <div class="card-label">AED / Day Average</div>
+    </div>
+  </div>
+
+  <h3>Store Breakdown</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Store</th><th>Sales (AED)</th><th>Share</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Yas Mall Abu Dhabi</td><td>233,479</td><td>42.9%</td></tr>
+        <tr><td>Mirdif City Centre</td><td>173,689</td><td>31.9%</td></tr>
+        <tr><td>DXBike Meydan</td><td>132,492</td><td>24.3%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout callout-blue">
+    <p>Ramadan specials included <strong>Date Marshmallow, Date Marshmallow Box, Vanilla Marshmallow Box,</strong> and <strong>Gathering Box</strong>. Market was challenging — Deliveroo blackout, holiday departures, 9 days of rain in March. Feb–Mar delivery totals were ~AED 140K combined, with flat performance and declining CVR (11% → 9.3%).</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 08. POST-RAMADAN CAMPAIGN -->
+<!-- ============================================================ -->
+<div class="section" id="s08">
+  <div class="section-header">
+    <div class="section-num">08</div>
+    <h2>Post-Ramadan Campaign</h2>
+  </div>
+  <p style="color:var(--text3);margin-bottom:24px;">23 March – 23 April 2026</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-value">645,420</div>
+      <div class="card-label">Total Sales (AED)</div>
+    </div>
+    <div class="card">
+      <div class="card-value">32 Days</div>
+      <div class="card-label">Campaign Duration</div>
+    </div>
+    <div class="card">
+      <div class="card-value">~20,169</div>
+      <div class="card-label">AED / Day Average</div>
+    </div>
+    <div class="card">
+      <div class="card-value" style="color:var(--green)">+18.5%</div>
+      <div class="card-label">vs Ramadan Period</div>
+    </div>
+  </div>
+
+  <h3>Store Breakdown</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Store</th><th>Sales (AED)</th><th>Share</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Mirdif City Centre</td><td>239,786</td><td>37.2%</td></tr>
+        <tr><td>Yas Mall Abu Dhabi</td><td>229,067</td><td>35.5%</td></tr>
+        <tr><td>DXBike Meydan</td><td>174,873</td><td>27.1%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout callout-green">
+    <p>Post-Ramadan saw a strong bounce: <strong>+18.5% total vs Ramadan, daily average up from AED 15.6K to AED 20.2K.</strong> Spring launch ('First Sip' campaign Apr 16–23, full Apr 24), Browz Event (AED 5,500 paid catering), barter influencer campaign. CVR recovered to 11.3%. Cold drinks started taking off.</p>
+  </div>
+</div>
+
+<div class="section" id="s10">
+  <div class="section-header">
+    <div class="section-num">10</div>
+    <h2>New Drinks &amp; Specials</h2>
+  </div>
+
+  <p>Knoops Specials launched in March 2024 as limited-edition and seasonal drops. The range has proven that <strong>novelty drives trial and premium pricing works</strong> — customers respond to curated, time-limited offerings that feel distinct from the core menu.</p>
+
+  <h3>Product Performance Table</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Drink</th>
+          <th>Units Sold</th>
+          <th>Revenue (AED)</th>
+          <th>ASP (AED/Unit)</th>
+          <th>Top Store</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Date Marshmallow</td><td>448</td><td>3,839</td><td>8.6</td><td>MCC (198)</td></tr>
+        <tr><td>Spanish Latte</td><td>299</td><td>9,966</td><td>33.3</td><td>Yas Mall (158)</td></tr>
+        <tr><td>Coconut Hot Chocolate</td><td>249</td><td>8,544</td><td>34.3</td><td>Yas Mall (117)</td></tr>
+        <tr><td>Tiramisu Milkshake</td><td>196</td><td>8,026</td><td>40.9</td><td>Yas Mall (84)</td></tr>
+        <tr><td>Date Marshmallow</td><td>448</td><td>3,839</td><td>8.6</td><td>MCC (198)</td></tr>
+        <tr><td>Gathering Box</td><td>11</td><td>1,624</td><td>147.6</td><td>Meydan (6)</td></tr>
+        <tr><td>Espresso Matcha</td><td>41</td><td>1,601</td><td>39.0</td><td>Yas (16)</td></tr>
+        <tr><td>Vanilla Marshmallow Box</td><td>24</td><td>869</td><td>36.2</td><td>MCC (12)</td></tr>
+        <tr><td>Date Marshmallow Box</td><td>13</td><td>594</td><td>45.7</td><td>Meydan (8)</td></tr>
+        <tr><td>Ramadan Works</td><td>48</td><td>457</td><td>9.5</td><td>MCC (35)</td></tr>
+        <tr><td>Protein Add On</td><td>40</td><td>267</td><td>6.7</td><td>Meydan (38)</td></tr>
+        <tr class="row-highlight"><td><strong>Total</strong></td><td><strong>1,369</strong></td><td><strong>35,788</strong></td><td><strong>26.1</strong></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Drink-by-Drink Insights</h3>
+
+  <div class="insight-grid">
+    <div class="insight-card accent-green">
+      <div class="insight-icon">☕</div>
+      <h4>Spanish Latte — Breakout Performer</h4>
+      <p>299 units, 9,966 AED. Yas Mall drove 53% of volume (158 units). At 33.3 AED/unit it's a high-margin coffee innovation.</p>
+      <div class="rec">↗ Strong candidate to become a permanent menu item.</div>
+    </div>
+
+    <div class="insight-card accent-blue">
+      <div class="insight-icon">🥥</div>
+      <h4>Coconut Hot Chocolate — Premium Variant</h4>
+      <p>249 units, 8,544 AED. Highest revenue per unit among drinks at 34.3 AED. Yas leads (117 units). Shows demand for premium chocolate variants with alternative milk/flavor profiles.</p>
+      <div class="rec">↗ Explore more alternative-milk/flavor pairings in the chocolate range.</div>
+    </div>
+
+    <div class="insight-card accent-purple">
+      <div class="insight-icon">🍰</div>
+      <h4>Tiramisu Milkshake — Ultra-Premium</h4>
+      <p>196 units, 8,026 AED. Highest ASP of any drink at 40.9 AED/unit. Evenly split between Yas (84) and MCC (80). Premium milkshake positioning is working — customers will pay 40+ AED for an indulgent experience.</p>
+      <div class="rec">↗ Use this as a proof point for future premium milkshake drops.</div>
+    </div>
+
+    <div class="insight-card accent-orange">
+      <div class="insight-icon">🌴</div>
+      <h4>Date Marshmallow — Volume King, Not Revenue King</h4>
+      <p>Volume king at 448 units but only 3,839 AED (8.6 AED/unit). It's a low-ASP traffic driver / add-on, not a revenue driver. MCC led with 198 units.</p>
+      <div class="rec">↗ Consider bundling it with higher-margin drinks rather than selling standalone.</div>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-icon">🍵</div>
+      <h4>Espresso Matcha — Niche but Premium</h4>
+      <p>Premium at 39 AED/unit. Only 41 units — early days. Evenly spread across stores. Health-conscious positioning has potential especially with the running/cycling community near Meydan.</p>
+      <div class="rec">↗ Low volume but high ASP. Watch for growth with targeted community outreach.</div>
+    </div>
+
+    <div class="insight-card accent-green">
+      <div class="insight-icon">🎁</div>
+      <h4>Gathering Box — Premium Gifting Format</h4>
+      <p>Highest ASP at 147.6 AED/unit. Only 11 sold but 1,624 AED revenue. Premium gifting format works. Meydan led (6 units).</p>
+      <div class="rec">↗ Promote more during gifting occasions — Eid, corporate orders, seasonal moments.</div>
+    </div>
+  </div>
+
+  <h3>New Launch Spotlight: Matcha Strawberry</h3>
+
+  <div class="callout callout-green">
+    <p><strong>Matcha Strawberry — The Running Companion.</strong> Positioned as a health-forward, refreshing option targeting the active lifestyle community around DXBike Meydan and the broader fitness-conscious UAE consumer. With Espresso Matcha already showing 39 AED/unit ASP and matcha's growing popularity in the region, the Strawberry Matcha variant taps into the wellness + indulgence crossover. <strong>Key opportunity:</strong> partner with running clubs, cycling groups, and fitness events near Meydan to drive trial. This drink bridges Knoops' chocolate heritage with the health-forward trend — expanding the addressable market beyond chocolate purists.</p>
+  </div>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- 11. COFFEE PERFORMANCE -->
+<!-- ============================================================ -->
+<div class="section" id="s11">
+  <div class="section-header">
+    <div class="section-num">11</div>
+    <h2>Coffee Performance</h2>
+  </div>
+
+  <p>Coffee categories have shown consistent growth since March — both hot and cold.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-value">90.1K AED</div>
+      <div class="card-label">April Coffee Revenue</div>
+      <div class="card-sub">All coffee categories combined</div>
+    </div>
+    <div class="card">
+      <div class="card-value positive">+25%</div>
+      <div class="card-label">Mar→Apr Growth</div>
+      <div class="card-sub">Recovering since Feb dip</div>
+    </div>
+    <div class="card">
+      <div class="card-value">3,868</div>
+      <div class="card-label">April Units Sold</div>
+      <div class="card-sub">Hot + Cold + Mocha</div>
+    </div>
+    <div class="card">
+      <div class="card-value">14.2%</div>
+      <div class="card-label">Share of Total Sales</div>
+      <div class="card-sub">April 2026</div>
+    </div>
+  </div>
+
+  <h3>Revenue by Coffee Category (AED)</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Category</th><th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>Feb→Mar</th><th>Mar→Apr</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Coffee - Hot</td><td>38,392</td><td>28,390</td><td>40,414</td><td>41,370</td><td class="positive">+42.3%</td><td class="positive">+2.4%</td></tr>
+        <tr><td>Coffee - Cold</td><td>—</td><td>11,283</td><td>20,547</td><td>21,727</td><td class="positive">+82.1%</td><td class="positive">+5.7%</td></tr>
+        <tr><td>Mocha - Hot</td><td>35,032</td><td>21,015</td><td>24,650</td><td>27,014</td><td class="positive">+17.3%</td><td class="positive">+9.6%</td></tr>
+        <tr><td>Mocha - Iced</td><td>16,986</td><td>11,408</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr class="row-highlight"><td><strong>Total Coffee</strong></td><td><strong>90,410</strong></td><td><strong>72,096</strong></td><td><strong>85,611</strong></td><td><strong>90,111</strong></td><td class="positive"><strong>+18.7%</strong></td><td class="positive"><strong>+5.3%</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="chart-container">
+    <div class="chart-title">Coffee Revenue by Category — Monthly (AED)</div>
+    <canvas id="coffeeRevenueChart"></canvas>
+    <div class="chart-source">Source: Tenzo</div>
+  </div>
+
+  <div class="chart-container">
+    <div class="chart-title">Coffee Units Sold by Category — Monthly</div>
+    <canvas id="coffeeUnitsChart"></canvas>
+    <div class="chart-source">Source: Tenzo</div>
+  </div>
+
+  <div class="callout">
+    <p>Coffee has been a consistent growth engine since the March recovery. Hot coffee is the volume driver (2,185 units in April), but cold coffee is the fastest-growing segment (+82% Feb→Mar, now sustaining at 21.7K/month). With summer approaching, cold coffee + iced mocha will become increasingly important. The Spanish Latte proves there's appetite for coffee innovation — consider making it permanent and developing more coffee-forward specials for the summer menu.</p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 09. KEY INSIGHTS & RECOMMENDATIONS -->
+<!-- ============================================================ -->
+<div class="section" id="s09">
+  <div class="section-header">
+    <div class="section-num">09</div>
+    <h2>Key Insights &amp; Recommendations</h2>
+  </div>
+
+  <div class="insight-grid">
+    <div class="insight-card accent-blue">
+      <div class="insight-icon">🧊</div>
+      <h4>Cold Drinks = Summer Opportunity</h4>
+      <p>Cold portfolio (Iced Choc + Milkshake + Cold Coffee) grew from 19.8% of sales in Jan to 29% in Apr. Summer will push this further.</p>
+      <div class="rec">↗ Double down on cold drink marketing. Launch frozen hot chocolate at MCC &amp; Yas.</div>
+    </div>
+
+    <div class="insight-card accent-green">
+      <div class="insight-icon">🚀</div>
+      <h4>Meydan is the Growth Engine</h4>
+      <p>Consistently 120–221% over budget. Delivery-heavy location with strong neighborhood demand.</p>
+      <div class="rec">↗ Protect and increase delivery investment at Meydan. Don't reallocate budget away.</div>
+    </div>
+
+    <div class="insight-card accent-red">
+      <div class="insight-icon">📉</div>
+      <h4>Yas Mall Underperforming Budget</h4>
+      <p>13–21% below budget every month. Weakest MoM recovery in April (−3.4% while others grew 40%+).</p>
+      <div class="rec">↗ Location-specific strategy needed — footfall analysis, local partnerships, Abu Dhabi-targeted marketing.</div>
+    </div>
+
+    <div class="insight-card accent-orange">
+      <div class="insight-icon">⚠️</div>
+      <h4>Delivery Margins Under Pressure</h4>
+      <p>CM% dropped from 34.2% to 20.0% Jan→Apr. Heavy discounting is driving volume but eroding profitability.</p>
+      <div class="rec">↗ Reduce discount dependency. Focus on menu engineering and upselling to lift AOV.</div>
+    </div>
+
+    <div class="insight-card accent-purple">
+      <div class="insight-icon">🏆</div>
+      <h4>Noon is the Platform Winner</h4>
+      <p>Best CM, fastest growth (+47.3%), improving CVR. Most efficient marketing spend per order across all platforms.</p>
+      <div class="rec">↗ Consider increased investment in Noon marketing spend. Test exclusive menu items.</div>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-icon">🍫</div>
+      <h4>Knoops Specials Proved the Model</h4>
+      <p>~AED 25K/month since launch in March. Limited-edition and seasonal drops work — customers respond to novelty.</p>
+      <div class="rec">↗ Keep the cadence: Ramadan specials → Spring → Summer collection. Plan drops 4–6 weeks ahead.</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+// ---- Chart.js Defaults ----
+Chart.defaults.color = '#6b5344';
+Chart.defaults.borderColor = 'rgba(0,0,0,0.06)';
+Chart.defaults.font.family = "'Inter', sans-serif";
+Chart.defaults.font.size = 12;
+Chart.defaults.plugins.legend.labels.boxWidth = 14;
+Chart.defaults.plugins.legend.labels.padding = 16;
+
+const CHOC = '#8B5E3C';
+const CHOC50 = 'rgba(139,94,60,0.5)';
+const GREEN = '#16a34a';
+const RED = '#dc2626';
+const BLUE = '#2563eb';
+const ORANGE = '#ea580c';
+const PURPLE = '#7c3aed';
+
+// ---- 01 OVERVIEW: Monthly Total Sales ----
+new Chart(document.getElementById('chartOverview'), {
+  type: 'bar',
+  data: {
+    labels: ['January', 'February', 'March', 'April'],
+    datasets: [{
+      label: 'Total Sales (AED)',
+      data: [824814, 495730, 515931, 634233],
+      backgroundColor: [CHOC, CHOC50, CHOC50, CHOC],
+      borderRadius: 6,
+      borderSkipped: false
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => 'AED ' + ctx.raw.toLocaleString() } }
+    },
+    scales: {
+      y: { beginAtZero: true, ticks: { callback: v => (v/1000)+'K' } }
+    }
+  }
+});
+
+// ---- 02 STORE PERFORMANCE: Grouped Bar ----
+new Chart(document.getElementById('chartStoreGrouped'), {
+  type: 'bar',
+  data: {
+    labels: ['Mirdif', 'Yas Mall', 'Meydan'],
+    datasets: [
+      { label: 'Jan', data: [266811, 347750, 183478], backgroundColor: CHOC, borderRadius: 4 },
+      { label: 'Feb', data: [153372, 194396, 111178], backgroundColor: BLUE, borderRadius: 4 },
+      { label: 'Mar', data: [169335, 228549, 116514], backgroundColor: ORANGE, borderRadius: 4 },
+      { label: 'Apr', data: [244950, 220678, 167657], backgroundColor: GREEN, borderRadius: 4 }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': AED ' + ctx.raw.toLocaleString() } } },
+    scales: { y: { beginAtZero: true, ticks: { callback: v => (v/1000)+'K' } } }
+  }
+});
+
+// ---- 02 STORE PERFORMANCE: Pie ----
+new Chart(document.getElementById('chartStorePie'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Mirdif 38.7%', 'Yas Mall 34.8%', 'Meydan 26.5%'],
+    datasets: [{
+      data: [244950, 220678, 167657],
+      backgroundColor: [CHOC, BLUE, GREEN],
+      borderWidth: 2,
+      borderColor: '#ffffff'
+    }]
+  },
+  options: {
+    responsive: true,
+    cutout: '55%',
+    plugins: { legend: { position: 'bottom' } }
+  }
+});
+
+// ---- 03 DINE-IN vs DELIVERY: Stacked Bar ----
+new Chart(document.getElementById('chartDineInDelivery'), {
+  type: 'bar',
+  data: {
+    labels: ['January', 'February', 'March', 'April'],
+    datasets: [
+      { label: 'Dine-in (TA)', data: [689687, 425496, 423457, 535641], backgroundColor: CHOC, borderRadius: 4 },
+      { label: 'Delivery (HD)', data: [123971, 68386, 69011, 97644], backgroundColor: BLUE, borderRadius: 4 }
+    ]
+  },
+  options: {
+    responsive: true,
+    scales: {
+      x: { stacked: true },
+      y: { stacked: true, beginAtZero: true, ticks: { callback: v => (v/1000)+'K' } }
+    },
+    plugins: { tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': AED ' + ctx.raw.toLocaleString() } } }
+  }
+});
+
+// ---- 03 SPLIT DONUT ----
+new Chart(document.getElementById('chartSplitDonut'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Eat In 65.0%', 'Take Away 19.5%', 'Delivery 15.4%'],
+    datasets: [{
+      data: [411882, 123759, 97644],
+      backgroundColor: [CHOC, ORANGE, BLUE],
+      borderWidth: 2,
+      borderColor: '#ffffff'
+    }]
+  },
+  options: {
+    responsive: true,
+    cutout: '55%',
+    plugins: { legend: { position: 'bottom' } }
+  }
+});
+
+// ---- 04 CATEGORY TRENDS ----
+new Chart(document.getElementById('chartCategoryTrend'), {
+  type: 'line',
+  data: {
+    labels: ['January', 'February', 'March', 'April'],
+    datasets: [
+      { label: 'Hot Chocolate', data: [400955, 213044, 187683, 209372], borderColor: CHOC, backgroundColor: 'transparent', tension: 0.3, pointRadius: 4, borderWidth: 2.5 },
+      { label: 'Iced Chocolate', data: [73357, 58590, 52079, 92405], borderColor: BLUE, backgroundColor: 'transparent', tension: 0.3, pointRadius: 4, borderWidth: 2.5 },
+      { label: 'Milkshake', data: [62130, 45124, 56952, 69440], borderColor: GREEN, backgroundColor: 'transparent', tension: 0.3, pointRadius: 4, borderWidth: 2.5 },
+      { label: 'Coffee Hot', data: [38392, 28390, 40414, 41370], borderColor: ORANGE, backgroundColor: 'transparent', tension: 0.3, pointRadius: 4, borderWidth: 2.5 },
+      { label: 'Choc Retail Tubes', data: [86687, 34863, 19722, 30379], borderColor: PURPLE, backgroundColor: 'transparent', tension: 0.3, pointRadius: 4, borderWidth: 2.5 }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': AED ' + ctx.raw.toLocaleString() } } },
+    scales: { y: { beginAtZero: true, ticks: { callback: v => (v/1000)+'K' } } }
+  }
+});
+
+// ---- 05 TOP 5: Horizontal Bar ----
+new Chart(document.getElementById('chartTop5'), {
+  type: 'bar',
+  data: {
+    labels: ['Hot Chocolate', 'Iced Chocolate', 'Milkshake', 'Coffee Hot', 'Retail Tubes / Specials / Bakery'],
+    datasets: [
+      { label: 'February', data: [213044, 58590, 45124, 28390, 34863], backgroundColor: BLUE, borderRadius: 4 },
+      { label: 'March', data: [187683, 52079, 56952, 40414, 24958], backgroundColor: ORANGE, borderRadius: 4 },
+      { label: 'April', data: [209372, 92405, 69440, 41370, 30728], backgroundColor: GREEN, borderRadius: 4 }
+    ]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    plugins: { tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': AED ' + ctx.raw.toLocaleString() } } },
+    scales: { x: { beginAtZero: true, ticks: { callback: v => (v/1000)+'K' } } }
+  }
+});
+
+// ---- 06 PLATFORM GROUPED BAR ----
+new Chart(document.getElementById('chartPlatformGrouped'), {
+  type: 'bar',
+  data: {
+    labels: ['Deliveroo', 'Talabat', 'Careem', 'Noon'],
+    datasets: [
+      { label: 'Jan', data: [61632, 40391, 11874, 11224], backgroundColor: CHOC, borderRadius: 4 },
+      { label: 'Feb', data: [30166, 21643, 9925, 8340], backgroundColor: BLUE, borderRadius: 4 },
+      { label: 'Mar', data: [30271, 21025, 7824, 10701], backgroundColor: ORANGE, borderRadius: 4 },
+      { label: 'Apr', data: [39567, 33046, 11626, 15765], backgroundColor: GREEN, borderRadius: 4 }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': AED ' + ctx.raw.toLocaleString() } } },
+    scales: { y: { beginAtZero: true, ticks: { callback: v => (v/1000)+'K' } } }
+  }
+});
+
+// ---- 06 CM% TREND LINE ----
+new Chart(document.getElementById('chartCMTrend'), {
+  type: 'line',
+  data: {
+    labels: ['January', 'February', 'March', 'April'],
+    datasets: [{
+      label: 'CM % of Sales',
+      data: [34.2, 27.6, 25.9, 20.0],
+      borderColor: RED,
+      backgroundColor: 'rgba(248,113,113,0.1)',
+      fill: true,
+      tension: 0.3,
+      pointRadius: 6,
+      pointBackgroundColor: RED,
+      borderWidth: 2.5
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => ctx.raw + '%' } }
+    },
+    scales: {
+      y: { beginAtZero: true, max: 40, ticks: { callback: v => v+'%' } }
+    }
+  }
+});
+
+// ---- NAV: Active State on Scroll ----
+const navLinks = document.querySelectorAll('.nav a[href^="#"]');
+const sections = document.querySelectorAll('.section');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const active = document.querySelector('.nav a[href="#'+e.target.id+'"]');
+      if (active) active.classList.add('active');
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+sections.forEach(s => observer.observe(s));
+
+// ---- Mobile Nav ----
+const navToggle = document.getElementById('navToggle');
+const navClose = document.getElementById('navClose');
+const navSidebar = document.getElementById('navSidebar');
+const navOverlay = document.getElementById('navOverlay');
+function openNav() { navSidebar.classList.add('open'); navOverlay.classList.add('active'); }
+function closeNav() { navSidebar.classList.remove('open'); navOverlay.classList.remove('active'); }
+navToggle.addEventListener('click', openNav);
+navClose.addEventListener('click', closeNav);
+navOverlay.addEventListener('click', closeNav);
+navLinks.forEach(a => a.addEventListener('click', closeNav));
+
+// ---- 11 COFFEE REVENUE LINE CHART ----
+new Chart(document.getElementById('coffeeRevenueChart'), {
+  type: 'line',
+  data: {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr'],
+    datasets: [
+      { label: 'Coffee Hot', data: [38392, 28390, 40414, 41370], borderColor: '#8B5E3C', backgroundColor: 'transparent', tension: 0.3, pointRadius: 5, borderWidth: 2.5 },
+      { label: 'Coffee Cold', data: [0, 11283, 20547, 21727], borderColor: '#2563eb', backgroundColor: 'transparent', tension: 0.3, pointRadius: 5, borderWidth: 2.5 },
+      { label: 'Mocha Hot', data: [35032, 21015, 24650, 27014], borderColor: '#ea580c', backgroundColor: 'transparent', tension: 0.3, pointRadius: 5, borderWidth: 2.5 }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': AED ' + ctx.raw.toLocaleString() } } },
+    scales: {
+      y: { beginAtZero: true, ticks: { callback: v => (v/1000)+'K', color: '#6b5344' }, grid: { color: 'rgba(0,0,0,0.06)' } },
+      x: { ticks: { color: '#6b5344' }, grid: { color: 'rgba(0,0,0,0.06)' } }
+    }
+  }
+});
+
+// ---- 11 COFFEE UNITS STACKED BAR ----
+new Chart(document.getElementById('coffeeUnitsChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr'],
+    datasets: [
+      { label: 'Coffee Hot', data: [1922, 1502, 2066, 2185], backgroundColor: 'rgba(139,94,60,0.6)', borderRadius: 4 },
+      { label: 'Coffee Cold', data: [0, 419, 734, 828], backgroundColor: 'rgba(37,99,235,0.5)', borderRadius: 4 },
+      { label: 'Mocha Hot', data: [1048, 646, 758, 855], backgroundColor: 'rgba(234,88,12,0.5)', borderRadius: 4 }
+    ]
+  },
+  options: {
+    responsive: true,
+    scales: {
+      x: { stacked: true, ticks: { color: '#6b5344' }, grid: { color: 'rgba(0,0,0,0.06)' } },
+      y: { stacked: true, beginAtZero: true, ticks: { color: '#6b5344' }, grid: { color: 'rgba(0,0,0,0.06)' } }
+    },
+    plugins: { tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.raw.toLocaleString() + ' units' } } }
+  }
+});
+</script>
+</body>
+</html>
