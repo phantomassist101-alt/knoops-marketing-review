@@ -739,8 +739,8 @@
         <tr><td>Mocha — Hot</td><td>35,032</td><td>21,015</td><td>24,650</td><td>27,014</td><td class="negative">−22.9%</td></tr>
         <tr><td>Bakery-Sweet</td><td>31,943</td><td>19,687</td><td>23,625</td><td>30,728</td><td class="negative">−3.8%</td></tr>
         <tr><td>Knoops Specials</td><td>—</td><td>—</td><td>24,958</td><td>25,443</td><td style="color:var(--blue)">New</td></tr>
-        <tr><td>Coffee — Cold</td><td>—</td><td>11,283</td><td>20,547</td><td>21,727</td><td class="positive">+92.6% (Feb→Apr)</td></tr>
-        <tr><td>Mocha — Iced</td><td>16,986</td><td>11,408</td><td>—</td><td>—</td><td style="color:var(--text3)">—</td></tr>
+        <tr><td>Coffee — Cold</td><td>12,188</td><td>11,283</td><td>20,547</td><td>21,727</td><td class="positive">+78.3%</td></tr>
+        <tr><td>Mocha — Iced</td><td>16,986</td><td>11,408</td><td>10,383</td><td>20,263</td><td class="positive">+19.3%</td></tr>
       </tbody>
     </table>
   </div>
@@ -752,7 +752,7 @@
   </div>
 
   <div class="callout">
-    <p>Hot Chocolate remains king at 33% of April sales, but cold drinks are surging — <strong>Iced Chocolate grew +26% Jan→Apr, Cold Coffee +92.6% Feb→Apr.</strong> As summer approaches, the cold drink portfolio (Iced Choc + Milkshake + Cold Coffee + Mocha Iced) is becoming critical. In April, <strong>cold drinks = 29% of sales vs 19.8% in Jan.</strong></p>
+    <p>Hot Chocolate remains king at 33% of April sales, but cold drinks are surging — <strong>Iced Chocolate grew +26% Jan→Apr, Cold Coffee +78.3% Jan→Apr.</strong> As summer approaches, the cold drink portfolio (Iced Choc + Milkshake + Cold Coffee + Mocha Iced) is becoming critical. In April, <strong>cold drinks = 29% of sales vs 19.8% in Jan.</strong></p>
   </div>
 </div>
 
@@ -1077,7 +1077,7 @@
 
   <div class="card-grid">
     <div class="card">
-      <div class="card-value">90.1K AED</div>
+      <div class="card-value">110.4K AED</div>
       <div class="card-label">April Coffee Revenue</div>
       <div class="card-sub">All coffee categories combined</div>
     </div>
@@ -1087,12 +1087,12 @@
       <div class="card-sub">Recovering since Feb dip</div>
     </div>
     <div class="card">
-      <div class="card-value">3,868</div>
+      <div class="card-value">4,519</div>
       <div class="card-label">April Units Sold</div>
       <div class="card-sub">Hot + Cold + Mocha</div>
     </div>
     <div class="card">
-      <div class="card-value">14.2%</div>
+      <div class="card-value">17.4%</div>
       <div class="card-label">Share of Total Sales</div>
       <div class="card-sub">April 2026</div>
     </div>
@@ -1106,10 +1106,10 @@
       </thead>
       <tbody>
         <tr><td>Coffee - Hot</td><td>38,392</td><td>28,390</td><td>40,414</td><td>41,370</td><td class="positive">+42.3%</td><td class="positive">+2.4%</td></tr>
-        <tr><td>Coffee - Cold</td><td>—</td><td>11,283</td><td>20,547</td><td>21,727</td><td class="positive">+82.1%</td><td class="positive">+5.7%</td></tr>
+        <tr><td>Coffee - Cold</td><td>12,188</td><td>11,283</td><td>20,547</td><td>21,727</td><td class="positive">+82.1%</td><td class="positive">+5.7%</td></tr>
         <tr><td>Mocha - Hot</td><td>35,032</td><td>21,015</td><td>24,650</td><td>27,014</td><td class="positive">+17.3%</td><td class="positive">+9.6%</td></tr>
-        <tr><td>Mocha - Iced</td><td>16,986</td><td>11,408</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
-        <tr class="row-highlight"><td><strong>Total Coffee</strong></td><td><strong>90,410</strong></td><td><strong>72,096</strong></td><td><strong>85,611</strong></td><td><strong>90,111</strong></td><td class="positive"><strong>+18.7%</strong></td><td class="positive"><strong>+5.3%</strong></td></tr>
+        <tr><td>Mocha - Iced</td><td>16,986</td><td>11,408</td><td>10,383</td><td>20,263</td><td class="negative">-9.0%</td><td class="positive">+95.2%</td></tr>
+        <tr class="row-highlight"><td><strong>Total Coffee</strong></td><td><strong>102,598</strong></td><td><strong>72,096</strong></td><td><strong>95,994</strong></td><td><strong>110,374</strong></td><td class="positive"><strong>+33.2%</strong></td><td class="positive"><strong>+15.0%</strong></td></tr>
       </tbody>
     </table>
   </div>
@@ -1426,7 +1426,7 @@ new Chart(document.getElementById('coffeeRevenueChart'), {
     labels: ['Jan', 'Feb', 'Mar', 'Apr'],
     datasets: [
       { label: 'Coffee Hot', data: [38392, 28390, 40414, 41370], borderColor: '#8B5E3C', backgroundColor: 'transparent', tension: 0.3, pointRadius: 5, borderWidth: 2.5 },
-      { label: 'Coffee Cold', data: [0, 11283, 20547, 21727], borderColor: '#2563eb', backgroundColor: 'transparent', tension: 0.3, pointRadius: 5, borderWidth: 2.5 },
+      { label: 'Coffee Cold', data: [12188, 11283, 20547, 21727], borderColor: '#2563eb', backgroundColor: 'transparent', tension: 0.3, pointRadius: 5, borderWidth: 2.5 },
       { label: 'Mocha Hot', data: [35032, 21015, 24650, 27014], borderColor: '#ea580c', backgroundColor: 'transparent', tension: 0.3, pointRadius: 5, borderWidth: 2.5 }
     ]
   },
